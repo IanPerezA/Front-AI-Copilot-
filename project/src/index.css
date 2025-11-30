@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --dark-bg-primary: #1a1a2e;
+    --dark-bg-secondary: #16213e;
+    --dark-bg-tertiary: #0f3460;
+    --dark-bg-input: #2a2a3e;
+    --accent-primary: #7c3aed;
+    --accent-secondary: #a78bfa;
+    --text-primary: #f5f5f7;
+    --text-secondary: #b3b3b8;
+    --border-color: #3a3a4a;
+  }
+
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: var(--dark-bg-primary);
+    color: var(--text-primary);
+  }
+}
+
+@layer utilities {
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .dark-bg-primary {
+    background-color: var(--dark-bg-primary);
+  }
+
+  .dark-bg-secondary {
+    background-color: var(--dark-bg-secondary);
+  }
+
+  .dark-bg-tertiary {
+    background-color: var(--dark-bg-tertiary);
+  }
+
+  .dark-bg-input {
+    background-color: var(--dark-bg-input);
+  }
+
+  .accent-primary {
+    color: var(--accent-primary);
+  }
+
+  .bg-accent-primary {
+    background-color: var(--accent-primary);
+  }
+
+  .border-dark {
+    border-color: var(--border-color);
+  }
+
+  .text-primary {
+    color: var(--text-primary);
+  }
+
+  .text-secondary {
+    color: var(--text-secondary);
+  }
+}
