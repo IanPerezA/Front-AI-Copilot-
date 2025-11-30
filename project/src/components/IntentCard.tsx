@@ -25,29 +25,57 @@ export function IntentCard({ intent, content }: Props) {
 
   // --- FORMATEO ESPECIAL PARA RECORDATORIOS ---
   const renderRecordatorio = () => {
-    try {
-      const data = JSON.parse(content);
+  try {
+    const data = JSON.parse(content);
 
-      return (
-        <div className="text-sm space-y-2">
-          <p className="font-semibold">Recordatorio creado</p>
+    const fechaRaw =
+      data.fecha_ejecucion ||
+      data.fecha ||
+      data.fecha_hora ||
+      null;
 
-          <p>• <b>Fecha:</b> {data.fecha || data.fecha_ejecucion?.split("T")[0]}</p>
-          <p>• <b>Hora:</b> {data.hora || data.fecha_ejecucion?.split("T")[1]?.substring(0, 5)}</p>
-          <p>• <b>Descripción:</b> {data.descripcion || data.titulo}</p>
+    let fechaLocal = "";
+    let horaLocal = "";
 
-          {data.mensaje && (
-            <p className="pt-2">
-              <b>Mensaje de recordatorio:</b> "{data.mensaje}"
-            </p>
-          )}
-        </div>
-      );
-    } catch (e) {
-      // Si no es JSON válido, se muestra tal cual
-      return <div className="whitespace-pre-wrap text-sm">{content}</div>;
+    if (fechaRaw) {
+      const d = new Date(fechaRaw);
+
+      // Obtener fecha local
+      fechaLocal = d.toLocaleDateString("es-MX", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+
+      // Obtener hora local
+      horaLocal = d.toLocaleTimeString("es-MX", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      });
     }
-  };
+
+    return (
+      <div className="text-sm space-y-2">
+        <p className="font-semibold text-base">Recordatorio creado</p>
+
+        <p><b>• Fecha:</b> {fechaLocal || "—"}</p>
+        <p><b>• Hora:</b> {horaLocal || "—"}</p>
+        <p><b>• Descripción:</b> {data.descripcion || data.titulo}</p>
+
+        {data.mensaje && (
+          <p className="pt-2">
+            <b>Mensaje de recordatorio:</b> "{data.mensaje}"
+          </p>
+        )}
+      </div>
+    );
+  } catch (e) {
+    return <div className="whitespace-pre-wrap text-sm">{content}</div>;
+  }
+};
+
 
   // --- FORMATEO ESPECIAL PARA NOTA ---
   const renderNota = () => (
