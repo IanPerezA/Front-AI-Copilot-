@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { Message, Session, BackendResponse } from '../types';
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000/api';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://back-ai-copilot-production.up.railway.app/api';
 const MAX_TURNS = 20;
 
 export function useConversation() {
